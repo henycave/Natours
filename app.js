@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const cors = require('cors');
+const compression = require('compression');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
@@ -95,6 +96,8 @@ app.use(
     ],
   }),
 );
+
+app.use(compression());
 
 // app.use((req, res, next) => {
 //   console.log('Hello from the middleware');
