@@ -31,3 +31,12 @@ process.on('unhandledRejection', (err) => {
     process.exit(1);
   });
 });
+
+process.on('SIGTERM', async () => {
+  console.log('👋 SIGTERM RECEIVED. Shutting down gracefully');
+  await mongoose.connection.close();
+  console.log('💥 MongoDB connection closed.');
+  server.close(() => {
+    console.log('💥 Process terminated!');
+  });
+});
