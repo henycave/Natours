@@ -40,8 +40,6 @@ app.options('*', cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(helmet());
-
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -61,10 +59,8 @@ app.use(
       workerSrc: ["'self'", 'blob:'],
       connectSrc: [
         "'self'",
-        'http://127.0.0.1:3000',
         'https://api.mapbox.com',
         'https://events.mapbox.com',
-        'ws://127.0.0.1:*',
       ],
       frameSrc: [
         'https://js.stripe.com', // Allow Stripe to load iframes
