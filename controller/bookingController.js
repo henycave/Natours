@@ -56,7 +56,7 @@ const createBookingCheckout = catchAsync(async (session) => {
 });
 
 exports.webhookCheckout = (req, res, next) => {
-  const signiture = req.header['stripe-signiture'];
+  const signiture = req.headers['stripe-signature'];
 
   let event;
 
