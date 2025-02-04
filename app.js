@@ -23,17 +23,22 @@ app.enable('trust proxy');
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
-app.use(express.static(`${__dirname}/public`));
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(`${__dirname}/public`));
+//you can have cors allowed on a single route like api/v1/tours:id
+app.use(cors());
+//Access-Control-Allow-Origin
+// app.use(
+//   cors({
+//     origin: 'http://localhost:3000', // Allow requests from this frontend origin
+//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//     allowedHeaders: ['Content-Type', 'Authorization'],
+//     credentials: true, // Allow credentials (cookies)
+//   }),
+// );
 
-app.use(
-  cors({
-    origin: 'http://localhost:3000', // Allow requests from this frontend origin
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true, // Allow credentials (cookies)
-  }),
-);
+app.options('*', cors());
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(helmet());
 
